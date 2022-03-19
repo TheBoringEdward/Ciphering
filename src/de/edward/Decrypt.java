@@ -2,11 +2,11 @@ package de.edward;
 
 import java.util.Scanner;
 
-public class Encrypt {
+public class Decrypt {
 
     //private final int[] count = new int[26]; //no documentation
 
-    Encrypt() {
+    Decrypt() {
 
         Scanner scn2 = new Scanner(System.in);
 
@@ -14,11 +14,10 @@ public class Encrypt {
 
 
                  Vigenère Cipher
-                 This is a tool for encrypting text with the (less) famous "Vigenère Cipher".
+                 This is a tool for decrypting text with the (less) famous "Vigenère Cipher".
                  In order to use this tool properly you must take attention to the following:
-                 -Only use the standard latin letters "a" to "z" or Umlaute.
-                 -Only use lowercase letters
-                 -Don't use spaces in your key
+                 -Enter encrypted text in all lowercase
+                 -Same goes for the key
                  -Pray to God that the program will run properly""");
 
 
@@ -46,28 +45,28 @@ public class Encrypt {
             if (c == ' '){
                 encrpt.append(c);
             }else if (c == 'ü'){
-                c = (char) ('u' + t2);
+                c = (char) ('u' - t2);
                 c = ck(c);
                 encrpt.append(c);
-                c = (char) ('e' + t2);
+                c = (char) ('e' - t2);
                 c = ck(c);
                 encrpt.append(c);       //This is terrible.
             }else if (c == 'ö'){
-                c = (char) ('o' + t2);
+                c = (char) ('o' - t2);
                 c = ck(c);
                 encrpt.append(c);
-                c = (char) ('e' + t2);
+                c = (char) ('e' - t2);
                 c = ck(c);
                 encrpt.append(c);       //This is terrible.
             }else if (c == 'ä'){
-                c = (char) ('a' + t2);
+                c = (char) ('a' - t2);
                 c = ck(c);
                 encrpt.append(c);
-                c = (char) ('e' + t2);
+                c = (char) ('e' - t2);
                 c = ck(c);
                 encrpt.append(c);       //This is terrible.
             }else {
-                c = (char) (c + t2);
+                c = (char) (c - t2);
                 c = ck(c);
                 encrpt.append(c);
             }
