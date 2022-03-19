@@ -25,13 +25,25 @@ public class Encrypt {
         System.out.print("\n\n Enter Text to be processed: \n");
         //Plain text
         String plain = scn2.nextLine();
-        System.out.print("\n\n Enter Key: \n");     //TODO: Fix the repetition
+        System.out.print("\n\n Enter Key: \n");
         String key = scn2.nextLine();
         StringBuilder keyrep = new StringBuilder();
 
         for (int i = 0; i < plain.length(); i++) {
-            char m = key.charAt(i % key.length());
-            keyrep.append(m);
+            char c = plain.charAt(i);
+            char m;
+            if (c == ' '){
+                /*
+                m = key.charAt(i % key.length());
+                keyrep.append(m);
+                i += 1;
+                m = key.charAt(i % key.length());   //TODO: Fix this crap
+                keyrep.append(m);
+                 */
+            } else {
+                m = key.charAt(i % key.length());  //This method glosses over the Umlaute, causing the entire cipher to fail
+                keyrep.append(m);
+            }
         }
 
         System.out.print("\n Key: " + keyrep + " ; Text to be en-/decrypted: " + plain);
@@ -93,7 +105,7 @@ public class Encrypt {
         */
 
     public static void main(String[] args) {
-        Decrypt e = new Decrypt();  //Intellij always jells at me here for some reason
+        Encrypt e = new Encrypt();  //Intellij always jells at me here for some reason
         System.out.print("\n ======= This code has been provided by TheBoringEdward =======");
     }
 }

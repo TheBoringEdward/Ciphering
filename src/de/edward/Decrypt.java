@@ -24,7 +24,7 @@ public class Decrypt {
         System.out.print("\n\n Enter Text to be processed: \n");
         //Plain text
         String plain = scn2.nextLine();
-        System.out.print("\n\n Enter Key: \n");     //TODO: Fix the repetition
+        System.out.print("\n\n Enter Key: \n");
         String key = scn2.nextLine();
         StringBuilder keyrep = new StringBuilder();
 
@@ -44,28 +44,7 @@ public class Decrypt {
 
             if (c == ' '){
                 encrpt.append(c);
-            }else if (c == 'ü'){
-                c = (char) ('u' - t2);
-                c = ck(c);
-                encrpt.append(c);
-                c = (char) ('e' - t2);
-                c = ck(c);
-                encrpt.append(c);       //This is terrible.
-            }else if (c == 'ö'){
-                c = (char) ('o' - t2);
-                c = ck(c);
-                encrpt.append(c);
-                c = (char) ('e' - t2);
-                c = ck(c);
-                encrpt.append(c);       //This is terrible.
-            }else if (c == 'ä'){
-                c = (char) ('a' - t2);
-                c = ck(c);
-                encrpt.append(c);
-                c = (char) ('e' - t2);
-                c = ck(c);
-                encrpt.append(c);       //This is terrible.
-            }else {
+            } else {
                 c = (char) (c - t2);
                 c = ck(c);
                 encrpt.append(c);
