@@ -14,70 +14,69 @@ public class Encrypt {
 
 
                  Vigenère Cipher
-                 This is a tool for encrypting text with the (less) famous "Vigenère Cipher".
+                 This is a tool used for encrypting text with the (less) famous "Vigenère Cipher".
                  In order to use this tool properly you must take attention to the following:
                  -Only use the standard latin letters "a" to "z" or Umlaute.
                  -Only use lowercase letters
+                 -Don't use one or more spaces infront of the text you wish to process, or your program will crash
                  -Don't use spaces in your key
-                 -Pray to God that the program will run properly""");
+                 -ONLY USE THE LETTERS "a" TO "z" IN YOUR KEY!!!
+                 -Pray to your local deity that the program will run properly""");
 
 
-        System.out.print("\n\n Enter Text to be processed: \n");
+        System.out.print("\n\n Enter Text to be encrypted: \n");
         //Plain text
         String plain = scn2.nextLine();
         System.out.print("\n\n Enter Key: \n");
         String key = scn2.nextLine();
-        StringBuilder keyrep = new StringBuilder();
+
+        StringBuilder replain = new StringBuilder();
 
         for (int i = 0; i < plain.length(); i++) {
             char c = plain.charAt(i);
-            char m;
             if (c == ' '){
-                /*
-                m = key.charAt(i % key.length());
-                keyrep.append(m);
-                i += 1;
-                m = key.charAt(i % key.length());   //TODO: Fix this crap
-                keyrep.append(m);
-                 */
+                replain.append(c);
+            }else if (c == 'ß') {
+                replain.append('s');
+                replain.append('s');
+            }else if (c == 'ü'){
+                replain.append('u');
+                replain.append('e');
+            }else if (c == 'ö'){
+                replain.append('o');    //I'm sure there's a better way to do this
+                replain.append('e');
+            }else if (c == 'ä'){
+                replain.append('a');
+                replain.append('e');
             } else {
-                m = key.charAt(i % key.length());  //This method glosses over the Umlaute, causing the entire cipher to fail
-                keyrep.append(m);
+                replain.append(c);
             }
         }
 
-        System.out.print("\n Key: " + keyrep + " ; Text to be en-/decrypted: " + plain);
+        StringBuilder keyrep = new StringBuilder();
+
+        for (int i = 0; i < replain.length(); i++) {
+            char m;
+            m = key.charAt(i % key.length());
+            keyrep.append(m);
+        }
+
+        System.out.print("\n Key: " + keyrep + " ; Text to be encrypted: " + replain);
 
         //Encrypted text
         StringBuilder encrpt = new StringBuilder();
 
-        for (int i = 0; i < plain.length(); i++) {
-            char c = plain.charAt(i); //Character to be processed
-            int t2 = Character.getNumericValue(keyrep.charAt(i)) - 10; //The minus ten is necessary due to the numeric value of characters is always plus 10 (or 9, to be precise).
+        int e = 0;
+
+        for (int i = 0; i < replain.length(); i++) {
+            char c = replain.charAt(i); //Character to be processed
+            int t2 = Character.getNumericValue(keyrep.charAt(i - e)) - 10; //The minus ten is necessary due to the numeric value of characters is always plus 10 (or 9, to be precise).
+
+            //This was much more complicated to solve than it should've been
 
             if (c == ' '){
                 encrpt.append(c);
-            }else if (c == 'ü'){
-                c = (char) ('u' + t2);
-                c = ck(c);
-                encrpt.append(c);
-                c = (char) ('e' + t2);
-                c = ck(c);
-                encrpt.append(c);       //This is terrible.
-            }else if (c == 'ö'){
-                c = (char) ('o' + t2);
-                c = ck(c);
-                encrpt.append(c);
-                c = (char) ('e' + t2);
-                c = ck(c);
-                encrpt.append(c);       //This is terrible.
-            }else if (c == 'ä'){
-                c = (char) ('a' + t2);
-                c = ck(c);
-                encrpt.append(c);
-                c = (char) ('e' + t2);
-                c = ck(c);
-                encrpt.append(c);       //This is terrible.
+                e += 1;
             }else {
                 c = (char) (c + t2);
                 c = ck(c);
@@ -101,6 +100,8 @@ public class Encrypt {
 
       By all means, this project was just me doing absolute nonsense.
       However, for some reason, this project worked out MUCH smoother than I could've ever anticipated
+
+      All hail Wikipedia!
 
         */
 

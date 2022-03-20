@@ -14,14 +14,15 @@ public class Decrypt {
 
 
                  Vigenère Cipher
-                 This is a tool for decrypting text with the (less) famous "Vigenère Cipher".
+                 This is a tool used for decrypting text with the (less) famous "Vigenère Cipher".
                  In order to use this tool properly you must take attention to the following:
                  -Enter encrypted text in all lowercase
+                 -Don't use one or more spaces infront of the text you wish to process, or your program will crash
                  -Same goes for the key
-                 -Pray to God that the program will run properly""");
+                 -Pray to your local deity that the program will run properly""");
 
 
-        System.out.print("\n\n Enter Text to be processed: \n");
+        System.out.print("\n\n Enter Text to be decrypted: \n");
         //Plain text
         String plain = scn2.nextLine();
         System.out.print("\n\n Enter Key: \n");
@@ -33,24 +34,27 @@ public class Decrypt {
             keyrep.append(m);
         }
 
-        System.out.print("\n Key: " + keyrep + " ; Text to be en-/decrypted: " + plain);
+        System.out.print("\n Key: " + keyrep + " ; Text to be decrypted: " + plain);
 
         //Encrypted text
-        StringBuilder encrpt = new StringBuilder();
+        StringBuilder decrpt = new StringBuilder();
+
+        int e = 0;
 
         for (int i = 0; i < plain.length(); i++) {
             char c = plain.charAt(i); //Character to be processed
-            int t2 = Character.getNumericValue(keyrep.charAt(i)) - 10; //The minus ten is necessary due to the numeric value of characters is always plus 10 (or 9, to be precise).
+            int t2 = Character.getNumericValue(keyrep.charAt(i - e)) - 10;
 
             if (c == ' '){
-                encrpt.append(c);
-            } else {
+                decrpt.append(c);
+                e += 1;
+            }else {
                 c = (char) (c - t2);
                 c = ck(c);
-                encrpt.append(c);
+                decrpt.append(c);
             }
         }
-        System.out.print("\n\n Encrypted text: " + encrpt);
+        System.out.print("\n\n Decrypted text: " + decrpt);
     }
 
     private char ck (char c){
