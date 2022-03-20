@@ -61,7 +61,7 @@ public class Encrypt {
             keyrep.append(m);
         }
 
-        System.out.print("\n Key: " + keyrep + " ; Text to be encrypted: " + replain);
+        System.out.print("\n Key: " + key + " ; Text to be encrypted: " + replain);
 
         //Encrypted text
         StringBuilder encrpt = new StringBuilder();
@@ -107,6 +107,6 @@ public class Encrypt {
 
     public static void main(String[] args) {
         Encrypt e = new Encrypt();  //Intellij always jells at me here for some reason
-        System.out.print("\n ======= This code has been provided by TheBoringEdward =======");
+        System.out.print("\n\n ======= This code has been provided by TheBoringEdward =======");
     }
 }

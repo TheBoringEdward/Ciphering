@@ -34,7 +34,7 @@ public class Decrypt {
             keyrep.append(m);
         }
 
-        System.out.print("\n Key: " + keyrep + " ; Text to be decrypted: " + plain);
+        System.out.print("\n Key: " + key + " ; Text to be decrypted: " + plain);
 
         //Encrypted text
         StringBuilder decrpt = new StringBuilder();
@@ -76,6 +76,6 @@ public class Decrypt {
 
     public static void main(String[] args) {
         Decrypt e = new Decrypt();  //Intellij always jells at me here for some reason
-        System.out.print("\n ======= This code has been provided by TheBoringEdward =======");
+        System.out.print("\n\n ======= This code has been provided by TheBoringEdward =======");
     }
 }
