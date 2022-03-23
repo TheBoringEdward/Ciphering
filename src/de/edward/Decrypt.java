@@ -29,9 +29,27 @@ public class Decrypt {
         String key = scn2.nextLine();
         StringBuilder keyrep = new StringBuilder();
 
+        StringBuilder replain = new StringBuilder();
+
+        for (int i = 0; i < plain.length(); i++) {
+            char c = plain.charAt(i);
+            if (c == ' '){
+                replain.append(c);
+            }else if (c < 'a' || c > 'z'){
+                System.out.print("\n\n Invalid character in Plaintext ( "+c+" ). Killing program...\n");
+                System.exit(0);
+            } else {
+                replain.append(c);
+            }
+        }
+
         for (int i = 0; i < plain.length(); i++) {
             char m = key.charAt(i % key.length());
             keyrep.append(m);
+            if (m < 'a' || m > 'z'){
+                System.out.print("\n\n Invalid character in Key ( "+m+" ). Killing program...\n");
+                System.exit(0);
+            }
         }
 
         System.out.print("\n Key: " + key + " ; Text to be decrypted: " + plain);
@@ -72,10 +90,12 @@ public class Decrypt {
       By all means, this project was just me doing absolute nonsense.
       However, for some reason, this project worked out MUCH smoother than I could've ever anticipated
 
+      All hail Wikipedia!
+
         */
 
     public static void main(String[] args) {
         Decrypt e = new Decrypt();  //Intellij always jells at me here for some reason
-        System.out.print("\n\n ======= This code has been provided by TheBoringEdward =======");
+        System.out.print("\n\n ======= This code has been provided by TheBoringEdward =======\n");
     }
 }

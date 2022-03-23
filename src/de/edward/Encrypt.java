@@ -34,20 +34,25 @@ public class Encrypt {
 
         for (int i = 0; i < plain.length(); i++) {
             char c = plain.charAt(i);
-            if (c == ' '){
+            if (c == ','){
+                replain.append(" comma");
+            }else if (c == '!'){
+                replain.append(" exclamationpoint");
+            }else if (c == '?'){
+                replain.append(" questionmark");
+            }else if (c == ' '){
                 replain.append(c);
             }else if (c == 'ß') {
-                replain.append('s');
-                replain.append('s');
+                replain.append("ss");
             }else if (c == 'ü'){
-                replain.append('u');
-                replain.append('e');
+                replain.append("ue");
             }else if (c == 'ö'){
-                replain.append('o');    //I'm sure there's a better way to do this
-                replain.append('e');
+                replain.append("oe");    //I'm sure there's a better way to do this
             }else if (c == 'ä'){
-                replain.append('a');
-                replain.append('e');
+                replain.append("ae");
+            }else if (c < 'a' || c > 'z'){
+                System.out.print("\n\n Invalid character in Plaintext ( "+c+" ). Killing program...\n");
+                System.exit(0);
             } else {
                 replain.append(c);
             }
@@ -59,6 +64,10 @@ public class Encrypt {
             char m;
             m = key.charAt(i % key.length());
             keyrep.append(m);
+            if (m < 'a' || m > 'z'){
+                System.out.print("\n\n Invalid character in Key ( "+m+" ). Killing program...\n");
+                System.exit(0);
+            }
         }
 
         System.out.print("\n Key: " + key + " ; Text to be encrypted: " + replain);
@@ -107,6 +116,6 @@ public class Encrypt {
 
     public static void main(String[] args) {
         Encrypt e = new Encrypt();  //Intellij always jells at me here for some reason
-        System.out.print("\n\n ======= This code has been provided by TheBoringEdward =======");
+        System.out.print("\n\n ======= This code has been provided by TheBoringEdward =======\n");
     }
 }
