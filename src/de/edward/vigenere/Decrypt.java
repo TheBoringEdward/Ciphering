@@ -1,4 +1,4 @@
-package de.edward;
+package de.edward.vigenere;
 
 import java.util.Scanner;
 
@@ -6,8 +6,11 @@ public class Decrypt {
 
     //private final int[] count = new int[26]; //no documentation
 
-    Decrypt() {
+    public Decrypt() {
 
+    }
+
+    public void de() {
         Scanner scn2 = new Scanner(System.in);
 
         System.out.print("""
@@ -29,17 +32,15 @@ public class Decrypt {
         String key = scn2.nextLine();
         StringBuilder keyrep = new StringBuilder();
 
-        StringBuilder replain = new StringBuilder();
+        //StringBuilder replain = new StringBuilder();
 
         for (int i = 0; i < plain.length(); i++) {
             char c = plain.charAt(i);
             if (c == ' '){
-                replain.append(c);
+                //Do nothing
             }else if (c < 'a' || c > 'z'){
-                System.out.print("\n\n Invalid character in Plaintext ( "+c+" ). Killing program...\n");
-                System.exit(0);
-            } else {
-                replain.append(c);
+                System.out.print("\n\n Illegal character in Plaintext ( "+c+" ). Killing program...\n");
+                System.exit(1);
             }
         }
 
@@ -47,8 +48,8 @@ public class Decrypt {
             char m = key.charAt(i % key.length());
             keyrep.append(m);
             if (m < 'a' || m > 'z'){
-                System.out.print("\n\n Invalid character in Key ( "+m+" ). Killing program...\n");
-                System.exit(0);
+                System.out.print("\n\n Illegal character in Key ( "+m+" ). Killing program...\n");
+                System.exit(2);
             }
         }
 
@@ -94,8 +95,11 @@ public class Decrypt {
 
         */
 
+    /*
     public static void main(String[] args) {
-        Decrypt e = new Decrypt();  //Intellij always jells at me here for some reason
+        Decrypt e = new Decrypt();
+        e.de();
         System.out.print("\n\n ======= This code has been provided by TheBoringEdward =======\n");
     }
+     */
 }

@@ -1,4 +1,4 @@
-package de.edward;
+package de.edward.vigenere;
 
 import java.util.Scanner;
 
@@ -6,22 +6,26 @@ public class Encrypt {
 
     //private final int[] count = new int[26]; //no documentation
 
-    Encrypt() {
+    public Encrypt() {
 
+    }
+
+    public void en() {
         Scanner scn2 = new Scanner(System.in);
 
         System.out.print("""
 
 
-                 Vigenère Cipher
-                 This is a tool used for encrypting text with the (less) famous "Vigenère Cipher".
-                 In order to use this tool properly you must take attention to the following:
-                 -Only use the standard latin letters "a" to "z" or Umlaute.
-                 -Only use lowercase letters
-                 -Don't use one or more spaces infront of the text you wish to process, or your program will crash
-                 -Don't use spaces in your key
-                 -ONLY USE THE LETTERS "a" TO "z" IN YOUR KEY!!!
-                 -Pray to your local deity that the program will run properly""");
+                    Vigenère Cipher
+                    This is a tool used for encrypting text with the (less) famous "Vigenère Cipher".
+                    In order to use this tool properly you must take attention to the following:
+                    -Only use the standard latin letters "a" to "z" or Umlaute.
+                        (Exceptions to this are the following (: . , ! ? ß))
+                    -Only use lowercase letters
+                    -Don't use one or more spaces infront of the text you wish to process, or your program will crash
+                    -Don't use spaces in your key
+                    -ONLY USE THE LETTERS "a" TO "z" IN YOUR KEY!!!
+                    -Pray to your local deity that the program will run properly""");
 
 
         System.out.print("\n\n Enter Text to be encrypted: \n");
@@ -34,25 +38,29 @@ public class Encrypt {
 
         for (int i = 0; i < plain.length(); i++) {
             char c = plain.charAt(i);
-            if (c == ','){
+            if (c == ':') {
+                replain.append(" colon");
+            } else if (c == '.') {
+                replain.append(" point");
+            } else if (c == ',') {
                 replain.append(" comma");
-            }else if (c == '!'){
+            } else if (c == '!') {
                 replain.append(" exclamationpoint");
-            }else if (c == '?'){
-                replain.append(" questionmark");
-            }else if (c == ' '){
+            } else if (c == '?') {
+                replain.append(" questionmark");    //There certainly should be a better way
+            } else if (c == ' ') {
                 replain.append(c);
-            }else if (c == 'ß') {
+            } else if (c == 'ß') {
                 replain.append("ss");
-            }else if (c == 'ü'){
+            } else if (c == 'ü') {
                 replain.append("ue");
-            }else if (c == 'ö'){
+            } else if (c == 'ö') {
                 replain.append("oe");    //I'm sure there's a better way to do this
-            }else if (c == 'ä'){
+            } else if (c == 'ä') {
                 replain.append("ae");
-            }else if (c < 'a' || c > 'z'){
-                System.out.print("\n\n Invalid character in Plaintext ( "+c+" ). Killing program...\n");
-                System.exit(0);
+            } else if (c < 'a' || c > 'z') {
+                System.out.print("\n\n Illegal character in Plaintext ( " + c + " ). Killing program...\n");
+                System.exit(1);
             } else {
                 replain.append(c);
             }
@@ -64,9 +72,9 @@ public class Encrypt {
             char m;
             m = key.charAt(i % key.length());
             keyrep.append(m);
-            if (m < 'a' || m > 'z'){
-                System.out.print("\n\n Invalid character in Key ( "+m+" ). Killing program...\n");
-                System.exit(0);
+            if (m < 'a' || m > 'z') {
+                System.out.print("\n\n Illegal character in Key ( " + m + " ). Killing program...\n");
+                System.exit(2);
             }
         }
 
@@ -83,10 +91,10 @@ public class Encrypt {
 
             //This was much more complicated to solve than it should've been
 
-            if (c == ' '){
+            if (c == ' ') {
                 encrpt.append(c);
                 e += 1;
-            }else {
+            } else {
                 c = (char) (c + t2);
                 c = ck(c);
                 encrpt.append(c);
@@ -113,9 +121,11 @@ public class Encrypt {
       All hail Wikipedia!
 
         */
-
+    /*
     public static void main(String[] args) {
-        Encrypt e = new Encrypt();  //Intellij always jells at me here for some reason
+        Encrypt e = new Encrypt();
+        e.en();
         System.out.print("\n\n ======= This code has been provided by TheBoringEdward =======\n");
     }
+     */
 }
