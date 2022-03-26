@@ -1,11 +1,14 @@
 package de.edward.vigenere_new;
 
+import de.edward.Outer;
+
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Vigenere {
 
     Scanner scn2 = new Scanner(System.in);
+    Outer ot = new Outer();
     StringBuilder keyrep = new StringBuilder();
     StringBuilder replain = new StringBuilder();
 
@@ -19,9 +22,11 @@ public class Vigenere {
         System.out.print("\n\n  ==== Vigenère Cipher ====\n");
         System.out.print("\n\n Enter 1 for Encryption, or 2 for Decryption \n");
         q = scn2.nextLine();
-        if (Objects.equals(q, "1")){
+        if (Objects.equals(q, "1")){ //I'm not entirely sure what Intellij did here
+            ot.vig(Integer.parseInt(q));
             en();
         }else if (Objects.equals(q, "2")){
+            ot.vig(Integer.parseInt(q)); //*Sniffing glue* WE GOTTA AUTOMATE THIS SHIT!!!
             de();
         }else {
             System.out.print("\n\n Invalid option. Killing program...");
@@ -31,59 +36,10 @@ public class Vigenere {
 
     private void en(){
 
-        System.out.print("""
+        String key = enterK();
 
-
-                    Vigenère Cipher
-                    This is a tool used for encrypting text with the (less) famous "Vigenère Cipher".
-                    In order to use this tool properly you must take attention to the following:
-                    -Only use the standard latin letters "a" to "z" or Umlaute.
-                        (Exceptions to this are the following (: . , ! ? ß))
-                    -Only use lowercase letters
-                    -Don't use one or more spaces infront of the text you wish to process, or your program will crash
-                    -Don't use spaces in your key
-                    -ONLY USE THE LETTERS "a" TO "z" IN YOUR KEY!!!
-                    -Pray to your local deity that the program will run properly""");
-
-
-        System.out.print("\n\n Enter Text to be encrypted: \n");
-        //Plain text
-        String plain = scn2.nextLine();
-        System.out.print("\n\n Enter Key: \n");
-        String key = scn2.nextLine();
-
-        for (int i = 0; i < plain.length(); i++) {
-            char c = plain.charAt(i);
-            if (c == ':') {
-                replain.append(" colon");
-            } else if (c == '.') {
-                replain.append(" point");
-            } else if (c == ',') {
-                replain.append(" comma");
-            } else if (c == '!') {
-                replain.append(" exclamationpoint");
-            } else if (c == '?') {
-                replain.append(" questionmark");    //There certainly should be a better way
-            } else if (c == ' ') {
-                replain.append(c);
-            } else if (c == 'ß') {
-                replain.append("ss");
-            } else if (c == 'ü') {
-                replain.append("ue");
-            } else if (c == 'ö') {
-                replain.append("oe");    //I'm sure there's a better way to do this
-            } else if (c == 'ä') {
-                replain.append("ae");
-            } else if (c < 'a' || c > 'z') {
-                System.out.print("\n\n Illegal character in Plaintext ( " + c + " ). Killing program...\n");
-                System.exit(1);
-            } else {
-                replain.append(c);
-            }
-        }
-
-        plain = replain.toString();
-        keyrep = forge(plain, key);
+        replain = ot.rpln(enterP(1));
+        keyrep = forge(replain.toString(), key);
 
         System.out.print("\n Key: " + key + " ; Text to be encrypted: " + replain);
 
@@ -103,10 +59,11 @@ public class Vigenere {
                 e += 1;
             } else {
                 c = (char) (c + t2);
-                c = ck(c);
+                c = ot.ck(c);
                 encrpt.append(c);
             }
         }
+        ot.check(encrpt);
         System.out.print("\n\n Encrypted text: " + encrpt);
     }
 
@@ -114,25 +71,8 @@ public class Vigenere {
 
     public void de() {
 
-        System.out.print("""
-
-
-                 Vigenère Cipher
-                 This is a tool used for decrypting text with the (less) famous "Vigenère Cipher".
-                 In order to use this tool properly you must take attention to the following:
-                 -Enter encrypted text in all lowercase
-                 -Don't use one or more spaces infront of the text you wish to process, or your program will crash
-                 -Same goes for the key
-                 -Pray to your local deity that the program will run properly""");
-
-
-        System.out.print("\n\n Enter Text to be decrypted: \n");
-        //Plain text
-        String plain = scn2.nextLine();
-        System.out.print("\n\n Enter Key: \n");
-        String key = scn2.nextLine();
-
-        //StringBuilder replain = new StringBuilder();
+        String plain = enterP(2);
+        String key = enterK();
 
         for (int i = 0; i < plain.length(); i++) {
             char c = plain.charAt(i);
@@ -162,23 +102,32 @@ public class Vigenere {
                 e += 1;
             }else {
                 c = (char) (c - t2);
-                c = ck(c);
+                c = ot.ck(c);
                 decrpt.append(c);
             }
         }
+        ot.check(decrpt);
         System.out.print("\n\n Decrypted text: " + decrpt);
     }
 
     ///////////////////////////////////////////
 
-    private char ck (char c){
-        if (c - 'z' > 0) {
-            c = (char) (c - 26);
+    private String enterP(int i1){
+        if (i1 == 1){
+            System.out.print("\n\n Enter Text to be encrypted: \n");
+        } else if (i1 == 2){
+            System.out.print("\n\n Enter Text to be decrypted: \n");
+        } else {
+            System.out.print("\n\n Invalid prompt. ( "+i1+" ). Check program! Killing program...\n");
+            System.exit(5);
         }
-        if (c - 'a' < 0) {
-            c = (char) (c + 26);
-        }
-        return c;
+        //Plain text
+        return scn2.nextLine();
+    }
+
+    private String enterK(){
+        System.out.print("\n\n Enter Key: \n");
+        return scn2.nextLine();
     }
 
     ///////////////////////////////////////////

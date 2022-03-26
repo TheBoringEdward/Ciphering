@@ -44,5 +44,6 @@ Exit codes:
     1 = Illegal character in Plaintext
     2 = Illegal character in Key
     3 = Invalid option
-    4 = Yet to be fixed (Or not bothering)
+    4 = Something went wrong with the output (My fault)
+    5 = Wrong prompt option (My fault)
  */
