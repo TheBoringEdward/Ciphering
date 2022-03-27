@@ -60,7 +60,9 @@ public class Outer {
     public void check(StringBuilder proc){
         for (int i = 0; i < proc.length(); i++) {
             char c = proc.charAt(i);
-            if (c < 'a' || c > 'z') {
+            if (c == ' '){
+                //Do nothing
+            }else if (c < 'a' || c > 'z') {
                 System.out.print("\n\n Invalid output. ( " + c + " ). Check code! Killing program...\n");
                 System.exit(4);
             }

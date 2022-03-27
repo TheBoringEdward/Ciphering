@@ -36,9 +36,9 @@ public class Vigenere {
 
     private void en(){
 
+        replain = ot.rpln(enterP(1));
         String key = enterK();
 
-        replain = ot.rpln(enterP(1));
         keyrep = forge(replain.toString(), key);
 
         System.out.print("\n Key: " + key + " ; Text to be encrypted: " + replain);
